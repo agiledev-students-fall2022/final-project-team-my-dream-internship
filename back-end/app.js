@@ -90,7 +90,6 @@ async function fetchDescriptionAndLogo(companyName) {
   } else {
     res["logo"] = "";
   }
-  console.log(res);
   return res;
 }
 
@@ -123,10 +122,8 @@ app.get("/get_companies", async (req, res) => {
       description: description,
       logo: logo,
     };
-    console.log(companyobj);
     companies.push(companyobj);
   }
-  console.log(companies);
   res.send(companies);
 });
 
