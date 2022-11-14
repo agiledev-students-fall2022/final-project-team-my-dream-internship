@@ -10,5 +10,6 @@ const close = () => {
   listener.close();
 };
 module.exports = {
+  server: server,
   close: close,
 };

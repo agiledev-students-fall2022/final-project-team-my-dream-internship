@@ -65,7 +65,7 @@ async function scrape(url) {
 async function fetchDescriptionAndLogo(companyName) {
   companyName = companyName.replaceAll(" ", "+");
   url =
-    "https://api.simplify.jobs/v2/company/?page=0&size=27&value=" + companyName;
+    "https://api.simplify.jobs/v2/company/?page=0&size=2&value=" + companyName;
   const { data } = await axios.get(url);
   let res = {};
 
@@ -90,7 +90,7 @@ async function fetchDescriptionAndLogo(companyName) {
   } else {
     res["logo"] = "";
   }
-
+  console.log(res);
   return res;
 }
 
@@ -103,10 +103,13 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/get_test", async (req, res) => {
+  let companiesToPositions = await scrape(mystery);
+  res.send(companiesToPositions);
+});
+
 app.get("/get_companies", async (req, res) => {
   let companiesToPositions = await scrape(mystery);
-  // res.send(companiesToPositions);
-  // res.send(companiesToPositions);
   let companies = [];
   for (i = 0; i < companiesToPositions.length; i++) {
     let company = companiesToPositions[i];
@@ -120,16 +123,19 @@ app.get("/get_companies", async (req, res) => {
       description: description,
       logo: logo,
     };
+    console.log(companyobj);
     companies.push(companyobj);
   }
-
+  console.log(companies);
   res.send(companies);
 });
 
 app.get("/get_internships", async (req, res) => {
+  let resultLength =
+    "maxLen" in req.query ? req.query["maxLen"] : companiesToPositions.length;
   let companiesToPositions = await scrape(mystery);
   let internships = [];
-  for (i = 0; i < companiesToPositions.length; i++) {
+  for (let i = 0; i < resultLength; i++) {
     let company = companiesToPositions[i];
     const { description, logo } = await fetchDescriptionAndLogo(
       company.companyName
@@ -260,8 +266,8 @@ app.post("/get_proj", jsonParser, async (req, res) => {
 app.post("/post_review", async (req, res) => {
   const Reviewdata = [];
   Reviewdata.push(req.body);
-  res.send({Reviewdata});
-  console.log({Reviewdata});
+  res.send({ Reviewdata });
+  console.log({ Reviewdata });
 });
 
 app.post("/get_login", jsonParser, (req, res) => {
