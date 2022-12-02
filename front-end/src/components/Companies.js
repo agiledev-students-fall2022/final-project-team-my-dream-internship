@@ -176,7 +176,7 @@ export default function Companies() {
           <CardActionArea disableRipple>
             <Grid container spacing={0} paddingTop="30px" >
               <Grid item xs={3} >
-                <CardHeader  avatar={<Avatar src={company.logo} />} />
+                <CardHeader avatar={<Avatar src={company.logo} />} />
               </Grid>
               <Grid item xs={6} paddingTop="20px" >
                 <Typography
@@ -184,37 +184,36 @@ export default function Companies() {
                   align="left"
                   verticalAlign="center"
                   gutterBottom
-                  
                 >
                   <b>{company.companyName}</b>
                 </Typography>
-                  
-                </Grid>
-                <Grid item xs={3} paddingTop="20px">
+
+              </Grid>
+              <Grid item xs={3} paddingTop="20px">
 
                 <Link
                   to={company.companyName.toString()}
                   state={{ selectedCompany: company }}
-                  >
-                    <IconButton>
-                      <ArrowForward />
-                    </IconButton>
+                >
+                  <IconButton>
+                    <ArrowForward />
+                  </IconButton>
                 </Link>
-                    </Grid>
+              </Grid>
 
-          </Grid>
-          <CardContent className={classes.cardContent}>
-            <Typography
-              variant="body2"
-              align="Left"
-              color="text.Secondary"
-              Wrap
-            >
-              {company.description}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+            </Grid>
+            <CardContent className={classes.cardContent}>
+              <Typography
+                variant="body2"
+                align="Left"
+                color="text.Secondary"
+                Wrap
+              >
+                {company.description}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
       </Grid >
     );
 
