@@ -323,3 +323,5 @@ module.exports = app;
 // 1. Add a new company to the database
 // 2. Add a new internship to the database
 // 3. Add a new review to the database
+// 4. Add a new application to the database
+// 5. Add a new user to the database
