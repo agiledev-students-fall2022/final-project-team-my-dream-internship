@@ -317,3 +317,9 @@ app.post("/get_applications", jsonParser, async (req, res) => {
 });
 
 module.exports = app;
+
+
+// Bufixes
+// 1. Add a new company to the database
+// 2. Add a new internship to the database
+// 3. Add a new review to the database
