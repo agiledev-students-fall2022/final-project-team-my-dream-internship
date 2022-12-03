@@ -107,9 +107,9 @@ function ApplicationCell({ application }) {
               to={application.internshipID.toString()}
               state={{ selectedApplication: application }}
             >
-              <IconButton>
+              {/* <IconButton>
                 <ArrowForward />
-              </IconButton>
+              </IconButton> */}
             </Link>
           }
           title={application.positionName}
