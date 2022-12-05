@@ -30,6 +30,7 @@ import useStyles from "./CompaniesStyles";
 import { Home } from "@material-ui/icons";
 import Footer from "./Footer";
 import ReadMore from "./ReadMore";
+import NavBar from "./NavBar";
 // import { useAuthContext } from "../hooks/useAuthContext";
 
 const lorum =
@@ -108,22 +109,8 @@ export default function Companies() {
 
   return (
     <>
-      <AppBar position="relative">
-                <Toolbar >
-                <Link to="/dash" style={{ flexDirection: 'row-reverse' }}>
-                        <IconButton >
-                            <Home />
-                        </IconButton>
-                </Link>
-                <Typography variant="h6" color="inherit" paddingLeft={1}>
-                    MyDreamInternship
-                </Typography>
-                <Grid container justifyContent="flex-end"></Grid>
-                </Toolbar>
-      </AppBar>
-
-
-
+      <NavBar pageTitle="Internships" />
+      
       <main>
         <div>
           <Container>
