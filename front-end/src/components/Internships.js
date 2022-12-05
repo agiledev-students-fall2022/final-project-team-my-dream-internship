@@ -22,7 +22,24 @@ export default function Internships() {
   const [loaded, setLoaded] = useState(false);
   const [internships, setInternships] = useState([]);
 
-
+  const fetchInternships = () => {
+    // setMessages([])
+    // setLoaded(false)
+    axios
+      .get("http://localhost:5002/get_internships")
+      .then((response) => {
+        // axios bundles up all response data in response.data property
+        const internships = response.data;
+        setInternships(internships);
+      })
+      .catch((err) => {
+        // catching error
+      })
+      .finally(() => {
+        // the response has been received, so remove the loading icon
+        setLoaded(true);
+      });
+  };
 
 
   const searchInternships = (searchTerm) => {
@@ -56,26 +73,7 @@ export default function Internships() {
         setLoaded(true);
       });
   };
-
-  const fetchInternships = () => {
-    // setMessages([])
-    // setLoaded(false)
-    axios
-      .get("http://localhost:5002/get_internships")
-      .then((response) => {
-        // axios bundles up all response data in response.data property
-        const internships = response.data;
-        setInternships(internships);
-      })
-      .catch((err) => {
-        // catching error
-      })
-      .finally(() => {
-        // the response has been received, so remove the loading icon
-        setLoaded(true);
-      });
-  };
-
+  
   // set up loading data from api when the component first loads
   useEffect(() => {
     // fetch messages this once
@@ -85,15 +83,31 @@ export default function Internships() {
   return (
     <>
       <NavBar pageTitle="Internships" />
-      
+
       <main>
         <div>
-        <Grid
+
+          <SearchBarFunction />
+
+          {!loaded && <CenteredLoader />}
+          <Container maxWidth="md" className={classes.cardGrid}>
+            {internships.map((internship) => (
+              <InternshipCell internship={internship} key={internship.id} />
+            ))}
+          </Container>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
+
+  function SearchBarFunction() {
+    return (
+      <Grid
         container
         direction="row"
         justifyContent="center"
-        alignItems="center"
-      >
+        alignItems="center">
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <SearchBar
 
@@ -113,17 +127,9 @@ export default function Internships() {
           />
         </Grid>
       </Grid>
-          {!loaded && <CenteredLoader />}
-          <Container maxWidth="md" className={classes.cardGrid}>
-            {internships.map((internship) => (
-              <InternshipCell internship={internship} key={internship.id} />
-            ))}
-          </Container>
-        </div>
-      </main>
-      <Footer />
-    </>
-  );
+
+    )
+  };
 }
 
 
