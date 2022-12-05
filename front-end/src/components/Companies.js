@@ -109,24 +109,20 @@ export default function Companies() {
 
   return (
     <>
-      <NavBar pageTitle="Internships" />
-      
-      <main>
-        <div>
-          <Container>
-            <Typography
-              variant="h2"
-              align="center"
-              color="textPrimary"
-              gutterBottom
-              paddingTop="20px"
-              paddingBottom="20px"
-            >
-              Companies
-            </Typography>
+      <NavBar pageTitle="Companies" />
 
-            <SearchBar
-              placeholder="Search Position"
+
+      <Grid
+        container
+        direction="row" 
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+      <SearchBar
+              
+              placeholder="Search Companies"
+              justify="center"
               // onChange={() => setCompanies(allcompanies)}
               onRequestSearch={(e) => {
                 setLoaded(false);
@@ -136,9 +132,15 @@ export default function Companies() {
 
               style={{
                 margin: "20px",
-                maxWidth: 800
+                maxWidth: 800,
+                justifyContent: "center",
               }}
             />
+            </Grid>
+            </Grid>
+      <main>
+        <div>
+          <Container>
             <Grid container columnSpacing={12} rowSpacing={2} justify="center">
               {!loaded && <CenteredLoader />}
               {!noResults && loaded && companies.length === 0 && <NoResults />}
