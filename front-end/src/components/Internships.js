@@ -62,7 +62,6 @@ export default function Internships() {
         }
         else {
           setInternships([]);
-
         }
       })
       .catch((err) => {
@@ -73,7 +72,7 @@ export default function Internships() {
         setLoaded(true);
       });
   };
-  
+
   // set up loading data from api when the component first loads
   useEffect(() => {
     // fetch messages this once
