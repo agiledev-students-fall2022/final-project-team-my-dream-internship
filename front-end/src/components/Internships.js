@@ -66,7 +66,6 @@ export default function Internships() {
 
 function InternshipCell({ internship }) {
   const classes = useStyles();
-
   return (
     <Card className={classes.card}>
       <CardActionArea disableRipple>
