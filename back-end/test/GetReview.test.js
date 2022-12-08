@@ -14,8 +14,6 @@ describe("TEST API- get_reviews", () => {
       .get("/get_reviews")
       .end((err, res) => {
         // res.should.have.status(200);
-        // console.log(req.body)
-        // console.log(err)
         res.body.should.be.a("array");
         assert.equal(typeof res.body, "object");
         done();
