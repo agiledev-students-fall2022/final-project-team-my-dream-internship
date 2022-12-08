@@ -1,15 +1,18 @@
 const User = require("../models/userModel");
 
+// getting a user by their id
 async function getUser(id) {
     const user = await User.findById(id);
     return user;
 }
 
+// getting a user by their email
 async function getUserByEmail(email) {
     const user = await User.findOne({ email: email })
     return user;
 }
 
+// editing a user's profile information
 async function editUser(entry) {
     try {
         const newUser = await User.replaceOne({email: entry.email}, {
@@ -29,6 +32,7 @@ async function editUser(entry) {
     }
 }
 
+// exporting all functions
 module.exports = {
     getUser,
     getUserByEmail,
