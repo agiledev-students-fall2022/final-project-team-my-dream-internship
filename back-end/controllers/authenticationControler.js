@@ -21,8 +21,10 @@ const loginUser = async (req, res) => {
   }
 };
 
-// Signup user
+// function to sign up a new user
 const signupUser = async (req, res) => {
+
+  // getting user info from sign up form 
   const { email, password, firstName, lastName } = req.body;
 
   try {
@@ -37,4 +39,5 @@ const signupUser = async (req, res) => {
   }
 };
 
+// export all functions
 module.exports = { loginUser, signupUser };
