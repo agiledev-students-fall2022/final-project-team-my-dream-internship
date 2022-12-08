@@ -7,6 +7,7 @@ async function getApplications(email) {
     return applications;
 }
 
+// get a specific application for a user using internshipID
 async function getSpecApplication(email, id) {
     const app = await Application.find({user: email, internshipID: id});
     return app;
@@ -26,7 +27,7 @@ async function addApplication(application) {
         positionName,
         locations,
         status,
-        reviews: "test review",
+        reviews,
         notes: []
     });
     } catch (error) {
@@ -55,6 +56,7 @@ async function notesList(email, id) {
     return notes[0].notes;
 }
 
+// function to update an application's notes section whenever a new note is added
 async function addNote(email, id, entry) {
     const app = (await getSpecApplication(email, id))[0];
     const newNote = { id: uuidv4(), title: entry.title, date: entry.date, text: entry.text }
@@ -79,6 +81,7 @@ async function addNote(email, id, entry) {
     }    
 }
 
+// function to allow editing of an existing note
 async function editNote(email, id, entry) {
     const notes = await notesList(email, id);
     const newNotesList = notes.map(note => {
@@ -110,10 +113,12 @@ async function editNote(email, id, entry) {
     }    
 }
 
+// function to allow deletion of an existing note
 async function delNote(email, id, entry) {
     
     let notes = await notesList(email, id); 
 
+    // finding the note to be deleted and then removing it from the notes list
     for (var i = 0; i < notes.length; i++) {
         if (notes[i].id == entry.id) {
             notes.splice(i, 1);
@@ -122,6 +127,7 @@ async function delNote(email, id, entry) {
 
     const app = (await getSpecApplication(email, id))[0];
 
+    // updating the notes array which now excludes the deleted note
     try {
         const updatedApp = await Application.replaceOne({user: email, internshipID: id}, {
             user: app.user,
@@ -142,7 +148,7 @@ async function delNote(email, id, entry) {
     }    
 }
 
-
+// exporting all functions
 module.exports = {
     getApplications,
     addApplication,
