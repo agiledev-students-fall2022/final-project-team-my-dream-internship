@@ -1,10 +1,12 @@
 const Company = require('../models/companyModel');
 
+// getting all companies
 async function getCompanies() {
     const companies = await Company.find({}).sort({ createdAt: -1 });
     return companies;
 }
 
+// function to check if a company exists in the database
 async function checkIfExists(company) {
     const { companyName} = company;
     const result = await Company.findOne({
@@ -13,6 +15,7 @@ async function checkIfExists(company) {
     return result !== null;
 }
 
+// function to add new companies to the database
 async function addCompanies(companies) {
     companies.forEach(async (company) => {
         const { companyName, logo, companyDescription, url,companyPositions,locations,reviewids } = company;
@@ -33,19 +36,20 @@ async function addCompanies(companies) {
     });
 }
 
-//update company reviews
+// update company reviews
 async function updateCompanyReviews(name,reviewid) {
     const company = await Company.findOneAndUpdate({companyName: name},{$push:{reviewids: reviewid}});
     console.log(reviewid);
     console.log(company);
 }
 
-//get company by name
+// get company by name
 async function getCompanyByinternshipname(name) {
     const company = await Company.findOne({companyName: name});
     return company;
 }
 
+// function that searches for and returns companies based on user input
 async function searchCompanies(searchTerm) {
     try{
         const regex = new RegExp(searchTerm, "i");
@@ -62,6 +66,7 @@ async function searchCompanies(searchTerm) {
 
     }
 
+// exporting all functions
 module.exports = {
     getCompanies,
     checkIfExists,
