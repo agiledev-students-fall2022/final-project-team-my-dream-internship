@@ -1,6 +1,6 @@
 const Internship = require("../models/internshipModel");
 
-// get all Internship positions
+// function that checks for unusual position names and deletes them from the collection
 async function deleteNonsense() {
   const internships = await Internship.find({}).sort({ createdAt: -1 });
   for (let i = 0; i < internships.length; i++) {
@@ -32,11 +32,13 @@ async function deleteNonsense() {
   }
 }
 
+// getting all internships
 async function getInternships() {
   // await deleteNonsense();
   const internships = await Internship.find({}).sort({ createdAt: -1 });
   return internships;
 }
+
 //get internship using id
 async function getCompanyInternship(id) {
   const internship = await Internship.findById(id);
@@ -75,6 +77,7 @@ async function addInternships(internships) {
     }
   });
 }
+
 //input company name and get all internship ids for that company
 async function getInternshipIds(companyName) {
   const internships = await Internship.find({ companyName: companyName }).sort({
@@ -88,6 +91,7 @@ async function getInternshipIds(companyName) {
   return data;
 }
 
+// function that searches for and returns internships based on user input
 async function searchInternships(searchTerm) {
   try {
     // const regex = new RegExp(searchTerm, "i");
@@ -104,6 +108,7 @@ async function searchInternships(searchTerm) {
   }
 }
 
+// exporting all functions
 module.exports = {
   getInternships,
   checkIfExists,
