@@ -5,9 +5,13 @@ async function getReview(id) {
   return review;
 }
 
+// function to add a new review
 async function addReview(Data) {
+
+  // Data contains review info from user input
   const { user, company, review, rating, position, date } = Data;
   try {
+    // creating a new review document
     const newReview = await Review.create({
       user,
       company,
@@ -24,6 +28,7 @@ async function addReview(Data) {
   }
 }
 
+// exporting all functions
 module.exports = {
   getReview,
   addReview,
