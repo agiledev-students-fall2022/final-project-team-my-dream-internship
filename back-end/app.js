@@ -165,6 +165,7 @@ app.post("/post_userEmail", jsonParser, async (req, res) => {
   res.send(await userController.getUserByEmail(req.body.email));
 });
 
+
 app.post("/get_companybyinternshipname", jsonParser, async (req, res) => {
   const company = await companyController.getCompanyByinternshipname(
     req.body.companyName
@@ -172,6 +173,7 @@ app.post("/get_companybyinternshipname", jsonParser, async (req, res) => {
   res.send(company);
 });
 
+// moving an application from the saved section to the in-progress section
 app.post("/movetoinprogress", jsonParser, async (req, res) => {
   const entry = req.body.application;
   entry.status = "in-progress";
@@ -180,6 +182,7 @@ app.post("/movetoinprogress", jsonParser, async (req, res) => {
   res.send(app);
 });
 
+// moving an application from the in-progress section to the accepted section
 app.post("/movetoaccepted", jsonParser, async (req, res) => {
   const entry = req.body.application;
   entry.status = "accepted";
@@ -187,12 +190,15 @@ app.post("/movetoaccepted", jsonParser, async (req, res) => {
   res.send(app);
 });
 
+// handling requests for deletion of applications from saved, in-progress, or accepted sections
 app.post("/deleteapplication", jsonParser, async (req, res) => {
   const id = req.body.id;
   const app = await applicationController.deleteapplication(id);
   res.send(app);
 });
 
+// adding the new review to the database using reviewController and updating 
+// reviews under the companies collection as well
 app.post("/post_review", jsonParser, async (req, res) => {
   let review = req.body;
   console.log(review);
@@ -203,6 +209,7 @@ app.post("/post_review", jsonParser, async (req, res) => {
   res.send(review);
 });
 
+// respond to the get request with a list of all currently added reviews in the database
 app.post("/get_reviews", jsonParser, async (req, res) => {
   const reviews = [];
   const Reviewids = req.body.reviewids;
@@ -226,6 +233,7 @@ app.post("/get_reviews", jsonParser, async (req, res) => {
   res.send(reviews);
 });
 
+// respond to post_applications request from internship-detailed front end
 const appData = [];
 app.post("/post_applications", jsonParser, async (req, res) => {
   appData.push(req.body);
@@ -233,6 +241,8 @@ app.post("/post_applications", jsonParser, async (req, res) => {
 
 });
 
+// respond to get_applications request from frontend by sending all applications of a user 
+// from the database
 app.post("/get_applications", jsonParser, async (req, res) => {
   const applications = await applicationController.getApplications(
     req.body.user
