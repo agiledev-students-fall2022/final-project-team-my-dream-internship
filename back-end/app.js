@@ -23,7 +23,7 @@ const {
 } = require("./controllers/authenticationControler");
 const expController = require("./controllers/expController");
 
-// starts here
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -33,6 +33,8 @@ app.use((req, res, next) => {
 });
 app.options("*", cors());
 app.use(express.json());
+
+
 app.post("/login", loginUser);
 app.post("/signup", signupUser);
 
@@ -79,7 +81,6 @@ app.post("/search_companies", jsonParser, async (req, res) => {
     req.body.params.searchTerm
   );
 
-  // console.log(internships);
   res.status(200).send(internships);
 });
 
@@ -198,7 +199,6 @@ app.post("/post_review", jsonParser, async (req, res) => {
   await reviewController.addReview(review);
   const newreview = await reviewController.addReview(review);
   await companyController.updateCompanyReviews(review.company, newreview._id);
-  //updae the review array
 
   res.send(review);
 });
@@ -223,19 +223,14 @@ app.post("/get_reviews", jsonParser, async (req, res) => {
     }
   }
 
-  // console.log(reviews);
   res.send(reviews);
 });
 
 const appData = [];
 app.post("/post_applications", jsonParser, async (req, res) => {
   appData.push(req.body);
-
-  // console.log(req.body.params);
   await applicationController.addApplication(req.body.params);
 
-  // res.send({ appData });
-  // console.log({ appData });
 });
 
 app.post("/get_applications", jsonParser, async (req, res) => {
