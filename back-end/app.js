@@ -70,11 +70,13 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter });
 
+// getting all companies
 app.get("/get_companies", async (req, res) => {
   const companies = await companyController.getCompanies();
   res.status(200).send(companies);
 });
 
+// post request for searching for companies using user input
 app.post("/search_companies", jsonParser, async (req, res) => {
   // console.log(`searching ${req.body.params.searchTerm}`);
   const internships = await companyController.searchCompanies(
@@ -83,6 +85,9 @@ app.post("/search_companies", jsonParser, async (req, res) => {
 
   res.status(200).send(internships);
 });
+
+// post requests for the profile section, including adding a new note, 
+// fetching old notes, and fetching experiences and projects of the user
 
 app.post("/post_expArr", jsonParser, async (req, res) => {
   let exp3 = [
@@ -107,6 +112,7 @@ app.post("/post_newNote", jsonParser, async (req, res) => {
   );
 });
 
+// post requests that handle editing and deletion of notes in a Notes.js component 
 app.post("/post_delNote", jsonParser, async (req, res) => {
   await applicationController.delNote(
     req.body.entry[0],
@@ -123,6 +129,7 @@ app.post("/post_editNote", jsonParser, async (req, res) => {
   );
 });
 
+// get and post requests for adding, removing, and editing experiences
 app.post("/get_work", jsonParser, async (req, res) => {
   res.send(await expController.addExp(req.body.entry));
 });
@@ -161,11 +168,12 @@ app.post("/post_photo", upload.single("photo"), (req, res) => {
   res.send([imgpath, req.file.filename]);
 });
 
+// sends a response with a user object for the provided email
 app.post("/post_userEmail", jsonParser, async (req, res) => {
   res.send(await userController.getUserByEmail(req.body.email));
 });
 
-
+// getting the company name for the internship in question
 app.post("/get_companybyinternshipname", jsonParser, async (req, res) => {
   const company = await companyController.getCompanyByinternshipname(
     req.body.companyName
