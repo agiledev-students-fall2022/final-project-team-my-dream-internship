@@ -46,7 +46,6 @@ export default function InternshipDetailed() {
       "locations": selectedInternship.locations,
       "status": status // from dropdown 
     }
-    // console.log(params);
 
     axios
         .post('http://localhost:5002/post_applications', {
