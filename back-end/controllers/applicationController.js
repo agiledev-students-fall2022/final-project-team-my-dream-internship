@@ -27,7 +27,7 @@ async function addApplication(application) {
         positionName,
         locations,
         status,
-        reviews,
+        reviews: "test review",
         notes: []
     });
     } catch (error) {
