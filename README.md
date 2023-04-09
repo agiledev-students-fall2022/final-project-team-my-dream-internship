@@ -1,7 +1,5 @@
 [![Node.js CI](https://github.com/agiledev-students-fall2022/final-project-team-my-dream-internship/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/agiledev-students-fall2022/final-project-team-my-dream-internship/actions/workflows/node.js.yml)
 
-## Live App : [MyDreamInternship](http://www.mydreaminternship.tk)
-
 # Welcome to MyDreamInternship 
 ~ _Your one stop destination to finding the internship of your dreams!_
 
